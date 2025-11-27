@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"golang.org/x/text/language"
+	"golang.org/x/text/message"
 )
 
 func HasFlag(name string) bool {
@@ -18,6 +21,8 @@ func HasFlag(name string) bool {
 }
 
 func main() {
+	p := message.NewPrinter(language.English)
+
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: go run . --convert -from [base_currency_id] -to [target_currency_id] -amount [amount].")
 		return
@@ -43,7 +48,7 @@ func main() {
 		}
 
 		fmt.Println("Conversion result: ")
-		fmt.Printf("From: %s\nTo: %s\nAmount: %.2f\nRate: %.2f\nTotal: %.2f", rate.From, rate.To, rate.Amount, rate.Rate, rate.Result)
+		p.Printf("From: %s\nTo: %s\nAmount: %.2f\nRate: %.2f\nTotal: %.2f", rate.From, rate.To, rate.Amount, rate.Rate, rate.Result)
 	} else {
 		fmt.Println("The only available command now is convert.")
 	}
