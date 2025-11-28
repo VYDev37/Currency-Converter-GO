@@ -69,7 +69,7 @@ func GetRates(from string) (*Currency, error) {
 	if err == nil && data != nil {
 		lastUpdated := time.Unix(data.LastUpdated, 0)
 
-		if data.From == from && time.Since(lastUpdated) > time.Minute*30 {
+		if data.From == from && time.Since(lastUpdated) < time.Minute*30 {
 			return data, nil
 		}
 	}
