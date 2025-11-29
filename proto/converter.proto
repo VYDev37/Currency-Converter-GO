@@ -1,0 +1,26 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "curr-conv-api/proto";
+service ConverterService {
+    rpc GetCurrencyList(GetCurrencyListRequest) returns (GetCurrencyListResponse) {}
+    rpc DoConvert(DoConvertRequest) returns (DoConvertResponse) {}
+}
+
+message DoConvertRequest {
+    string from = 1;
+    string to = 2;
+    double amount = 3;
+}
+
+message DoConvertResponse {
+    double result = 1;
+}
+
+message GetCurrencyListRequest {}
+
+message GetCurrencyListResponse {
+    repeated string list = 1;
+}
+
+message Empty {}
