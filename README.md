@@ -3,9 +3,9 @@ Description: Only a simple currency converter made in Golang for learning purpos
 
 ## Which part does this cover?
 - [x] API Fetching
-- [x] More about TUI processing
+- [x] More about Slices
 - [x] More about parsing and writing JSON
-- [ ] Frontend Development (React + axios + TailwindCSS) (Currently working on)
+- [x] Frontend Development (React + axios + TailwindCSS) (Currently working on)
 - [x] Backend Development (gRPC + REST Server)
 - [x] Expiration and caching
 
