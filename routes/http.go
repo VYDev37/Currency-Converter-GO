@@ -60,15 +60,19 @@ func (server *HTTPServer) RegisterRoute(method, endpoint string, function func(h
 	server.mux.HandleFunc(fmt.Sprintf("%s %s", method, endpoint), function)
 }
 
-func (server *HTTPServer) Listen(port uint16) error {
-	fmt.Println("Registered routes.")
-	fmt.Printf("Server is running on port %d.\n", port)
-
+func (server *HTTPServer) RegisterRoutes() {
 	server.RegisterRoute("GET", "/", func(res http.ResponseWriter, req *http.Request) {
 		fmt.Fprintf(res, "Hello world!")
 	})
 	server.RegisterRoute("GET", "/get-currencies", server.HandleGetCurrencies)
 	server.RegisterRoute("POST", "/convert", server.HandleConversion)
+}
+
+func (server *HTTPServer) Listen(port uint16) error {
+	fmt.Println("Registered routes.")
+	fmt.Printf("Server is running on port %d.\n", port)
+
+	server.RegisterRoutes()
 
 	if err := http.ListenAndServe(fmt.Sprintf(":%d", port), AllowCORS(server.mux)); err != nil {
 		return err

@@ -6,3 +6,11 @@ type Converter struct {
 	LastUpdated int64              `json:"time_last_updated`
 	Rates       map[string]float64 `json:"rates"`
 }
+
+type ModelData struct {
+	From   string  `json:"from"`
+	To     string  `json:"to"`
+	Rate   float64 `json:"rate"`
+	Amount float64 `json:"amount"`
+	Result float64 `json:"result"`
+}

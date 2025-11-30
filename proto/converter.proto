@@ -14,7 +14,11 @@ message DoConvertRequest {
 }
 
 message DoConvertResponse {
-    double result = 1;
+    string from = 1;
+    string to = 2;
+    double rate = 3;
+    double amount = 4;
+    double result = 5;
 }
 
 message GetCurrencyListRequest {}

@@ -83,7 +83,11 @@ func (x *DoConvertRequest) GetAmount() float64 {
 
 type DoConvertResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        float64                `protobuf:"fixed64,1,opt,name=result,proto3" json:"result,omitempty"`
+	From          string                 `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	To            string                 `protobuf:"bytes,2,opt,name=to,proto3" json:"to,omitempty"`
+	Rate          float64                `protobuf:"fixed64,3,opt,name=rate,proto3" json:"rate,omitempty"`
+	Amount        float64                `protobuf:"fixed64,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Result        float64                `protobuf:"fixed64,5,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -116,6 +120,34 @@ func (x *DoConvertResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use DoConvertResponse.ProtoReflect.Descriptor instead.
 func (*DoConvertResponse) Descriptor() ([]byte, []int) {
 	return file_proto_converter_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DoConvertResponse) GetFrom() string {
+	if x != nil {
+		return x.From
+	}
+	return ""
+}
+
+func (x *DoConvertResponse) GetTo() string {
+	if x != nil {
+		return x.To
+	}
+	return ""
+}
+
+func (x *DoConvertResponse) GetRate() float64 {
+	if x != nil {
+		return x.Rate
+	}
+	return 0
+}
+
+func (x *DoConvertResponse) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
 }
 
 func (x *DoConvertResponse) GetResult() float64 {
@@ -249,9 +281,13 @@ const file_proto_converter_proto_rawDesc = "" +
 	"\x10DoConvertRequest\x12\x12\n" +
 	"\x04from\x18\x01 \x01(\tR\x04from\x12\x0e\n" +
 	"\x02to\x18\x02 \x01(\tR\x02to\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\"+\n" +
-	"\x11DoConvertResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x01R\x06result\"\x18\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\"{\n" +
+	"\x11DoConvertResponse\x12\x12\n" +
+	"\x04from\x18\x01 \x01(\tR\x04from\x12\x0e\n" +
+	"\x02to\x18\x02 \x01(\tR\x02to\x12\x12\n" +
+	"\x04rate\x18\x03 \x01(\x01R\x04rate\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x01R\x06amount\x12\x16\n" +
+	"\x06result\x18\x05 \x01(\x01R\x06result\"\x18\n" +
 	"\x16GetCurrencyListRequest\"-\n" +
 	"\x17GetCurrencyListResponse\x12\x12\n" +
 	"\x04list\x18\x01 \x03(\tR\x04list\"\a\n" +

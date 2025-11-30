@@ -11,6 +11,8 @@ Description: Only a simple currency converter made in Golang for learning purpos
 
 ## How to run
 - Run the app with command: `go run .`
+- Note: If you would like to modify the protobuf file, make sure to update it after the modification with command below:
+  `protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative proto/converter.proto`
 
 Note: There'll be three versions of this project.
 ## Versions:

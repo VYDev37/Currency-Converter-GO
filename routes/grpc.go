@@ -31,13 +31,23 @@ func (server *GRPCServer) DoConvert(ctx context.Context, req *pb.DoConvertReques
 	amount := req.GetAmount()
 
 	//fmt.Println(from, to, amount)
+	limit := float64(1000000000000000)
+	if amount <= 0 || amount > limit {
+		return nil, fmt.Errorf("amount must be greater than 0 and lesser than %.2f", limit)
+	}
 
 	result, err := server.Manager.Convert(from, to, amount)
 	if err != nil {
 		return nil, err
 	}
 
-	return &pb.DoConvertResponse{Result: result}, nil
+	return &pb.DoConvertResponse{
+		From:   result.From,
+		To:     result.To,
+		Amount: result.Amount,
+		Result: result.Result,
+		Rate:   result.Rate,
+	}, nil
 }
 
 func (server *GRPCServer) StartService(grpcPort uint16) error {

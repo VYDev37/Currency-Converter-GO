@@ -88,13 +88,17 @@ func (manager *ConvManager) Init() error {
 	return nil
 }
 
-func (manager *ConvManager) Convert(from, to string, amount float64) (float64, error) {
+func (manager *ConvManager) Convert(from, to string, amount float64) (*ModelData, error) {
 	from = strings.ToUpper(from)
 	to = strings.ToUpper(to)
 
+	if amount <= 0 {
+		return nil, fmt.Errorf("amount must only be positive")
+	}
+
 	if !slices.Contains(manager.currencies, from) || !slices.Contains(manager.currencies, to) {
 		if err := manager.Init(); err != nil { // reload
-			return 0, err
+			return nil, err
 		}
 	}
 
@@ -109,16 +113,22 @@ func (manager *ConvManager) Convert(from, to string, amount float64) (float64, e
 		rateTo = 1
 	}
 	if rateFrom == 0 {
-		return 0, fmt.Errorf("currency %s can't be found in database", from)
+		return nil, fmt.Errorf("currency %s can't be found in database", from)
 	}
 	if rateTo == 0 {
-		return 0, fmt.Errorf("currency %s can't be found in database", to)
+		return nil, fmt.Errorf("currency %s can't be found in database", to)
 	}
 
 	convertedRate := rateTo / rateFrom
 	result := convertedRate * amount
 
-	return result, nil
+	return &ModelData{
+		From:   from,
+		To:     to,
+		Rate:   convertedRate,
+		Amount: amount,
+		Result: result,
+	}, nil
 }
 
 func (manager *ConvManager) GetCurrencies() []string {
