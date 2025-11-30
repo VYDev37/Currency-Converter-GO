@@ -75,6 +75,10 @@ func Convert(from, to string, amount float64) (*ModelData, error) {
 	from = strings.ToUpper(from)
 	to = strings.ToUpper(to)
 
+	if amount <= 0 {
+		return nil, fmt.Errorf("amount must be positive")
+	}
+
 	data, err := GetRates(from)
 	if err != nil {
 		return nil, err
