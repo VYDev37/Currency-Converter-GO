@@ -104,6 +104,10 @@ func Convert(from, to string, amount float64) (*ModelData, error) {
 		return nil, err
 	}
 
+	if amount <= 0 {
+		return nil, fmt.Errorf("amount must be positive")
+	}
+
 	return &ModelData{
 		Amount: amount,
 		Rate:   rate,
